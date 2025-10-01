@@ -1,0 +1,55 @@
+
+    body{
+        
+        background-image:url("pinkbg.png");
+        background-color: beige;
+        background-size: 800px;
+        text-align:center;
+        font-family: 'Selvia Genatu', sans-serif; /* ur font */
+        color: white; /* text color */
+                
+       
+    }
+    #title{
+        margin-top: 100px;
+        line-height: 10px;
+        
+        
+    }
+    #subtitle{
+        opacity: 09;
+        font-size: 18px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+
+    }
+    #calendarcontainer{
+        display: flex;
+        justify-content: end;     
+
+    }
+    #calendardiv{
+        opacity: 0.8;
+        background-color:mediumpurple;
+        border-radius: 10px 10px 20px 20px;
+        margin:auto;
+        align-content: center;
+        text-align: center;
+        width:85%;
+        
+    }
+    #calendarHeading{
+
+         border-radius: 10px 10px 0px 0px;
+         border:2px solid whitesmoke;
+         padding: 0px 20px;
+         background-color:rgb(252, 131, 75);
+         line-height: 0px;
+
+    }    
+    @media screen and (min-width: 480px) and (max-width: 768px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+ 

@@ -145,16 +145,77 @@
             }
         }
         rowcount++;
+        /*a ye har aik row pr repeat hojaye gaw function ya jo bhi code humne likha hy hehe*/
     }
 
-  /*initialize completed array*/
-  var completed= new Array(31);
-  for(var i=0; i<daycount; i++){
-    var tempString=
-      ""+(currentMonth + 1) + "-"+(i+1)+"-"+ currentYear;
-    console.log("storing date:"+ tempString)  
+//   /*initialize completed array*/
+//   var completed= new Array(31);
+//   for(var i=0; i<daycount; i++){
+//     var tempString=""+(currentMonth + 1) + "-"+(i+1)+"-"+ currentYear;
+//     console.log("storing date:"+ tempString);
+//     var tempDay = localStorage.getItem(tempString);
+//     console.log(tempDay);
+//     if(tempDay == null || tempDay == "false"){
+//         localStorage.setItem(tempString,"false");
 
-  }
+//     }else if (tempDay == "true"){
+//         daysCompleted++;
+
+//     }
+//     totaldays.innerHTML= daysCompleted + "/"+ daysInThisMonth;
+
+//   }
+//   /* check storage and update cimpleted array*/
+//   for (var i = 0; i< currentDate; i++){
+//     ""+(currentMonth+1)+"-"+(i+1)+"-"+ currentYear;
+//     console.log(tempString);
+
+//     var chosenDay = localStorage.getItem(tempString);
+//     console.log(i+1 + ": " + chosenDay);
+//     var chosenDayDiv = document.getElementById("day"+(i+1));
+//     if (chosenDay == "true"){
+//         chosenDayDiv.style.backgroundColor  = "pink";
+
+//     }else if (chosenDay=="false"){
+//         chosenDayDiv.style.backgroundColor = "rgb(136, 143, 238)";
+//     }
+//   }
+
+
+/* Click on days to mark them complete */
+for(var i = 1; i <= daysInThisMonth; i++){
+    var dayDiv = document.getElementById("day" + i);
+    if(dayDiv){
+        dayDiv.onclick = function(){
+            var dayNumber = this.innerHTML;
+            var dateString = "" + (currentMonth + 1) + "-" + dayNumber + "-" + currentYear;
+            
+            var currentStatus = localStorage.getItem(dateString);
+            
+            if(currentStatus == "true"){
+                // If already completed, mark as incomplete
+                localStorage.setItem(dateString, "false");
+                this.style.backgroundColor = "rgb(227, 141, 218)";
+                daysCompleted--;
+            } else {
+                // Mark as completed
+                localStorage.setItem(dateString, "true");
+                this.style.backgroundColor = "rgb(227, 141, 218)";
+                daysCompleted++;
+            }
+            
+            // Update the total counter
+            totaldays.innerHTML = daysCompleted + "/" + daysInThisMonth;
+        }
+    }
+}
+
+
+
+
+
+
+
 </script>
 
 </html>

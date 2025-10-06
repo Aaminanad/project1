@@ -12,7 +12,7 @@
                 
 </head>
 <body>
-    <h1 id="title">MONTH</h1>
+    <h1 id="title">Month</h1>
     <h2 id="subtitle">Monthly Habit Tracker</h2>
 
     <div id="calendarcontainer">
@@ -29,6 +29,7 @@
                         <div class="day">3</div>
                         <div class="day">4</div>
                         <div class="day">5</div>
+                        <div class="day">6</div>
                     </div>
                     <div class="days">
                         <div class="day">1</div>
@@ -36,24 +37,31 @@
                         <div class="day">3</div>
                         <div class="day">4</div>
                         <div class="day">5</div>
+                        <div class="day">6</div>
                     </div><div class="days">
                         <div class="day">1</div>
                         <div class="day">2</div>
                         <div class="day">3</div>
                         <div class="day">4</div>
                         <div class="day">5</div>
+                        <div class="day">6</div>
                     </div><div class="days">
                         <div class="day">1</div>
                         <div class="day">2</div>
                         <div class="day">3</div>
                         <div class="day">4</div>
                         <div class="day">5</div>
-                    </div>
+                        <div class="day">6</div>
+                    </div><div class="days">
                         <div class="day">1</div>
                         <div class="day">2</div>
                         <div class="day">3</div>
                         <div class="day">4</div>
                         <div class="day">5</div>
+                        <div class="day">6</div>
+                        
+                    </div><div class="days">
+                        <div class="day">6</div>
                     </div>
                     
                 </div>
@@ -63,7 +71,90 @@
     </div>
     <button id="resetbutton">Reset Button</button>
 </body>
+<script>
+    /*get the date*/
+    var date= new Date();
+    console.log(date);
 
+    /*get the current date info*/
+    var currentMonth=date.getMonth();
+    var currentDay=date.getDay();
+    var currentDate=date.getDate();
+    var currentYear=date.getFullYear();
 
+    console.log("The current month is"+ currentMonth);
+    console.log("The current day is" + currentDay);
+    console.log("The current date is" + currentDate);
+    console.log("The current year is"+currentYear);
+
+    var months=[
+        "January",
+        "Feburary",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    var title = document.getElementById("title");
+    title.innerHTML ="🌸"+ months[currentMonth]+"🌸";
+    
+    /*update the name of the habit*/
+    var habittitle=document.getElementById("habittitle");
+    habittitle.onclick=function(){
+        let habits=prompt("What's your new habit?"+"💗",habittitle.innerHTML)
+        if(habits.length == 0){
+            habittitle.innerHTML="click to add your habit"+"💕";
+
+        }else{
+            habittitle.innerHTML=habits;
+        }
+
+    }
+
+    /*set the total days*/
+    var daysInTheMonthList = [31,28,31,30,31,30,31,31,30,31,30,31];
+    var daysInThisMonth= daysInTheMonthList[currentMonth];
+    var daysCompleted=0;
+    var totaldays=document.getElementById("totaldays");
+    totaldays.innerHTML="0/"+ daysInThisMonth;
+    /* set the calendar days*/
+    var daycount=0;
+    var rowcount=0;
+    var days= document.getElementsByClassName("days");
+    /*for loop create ki hehe*/
+    for(var i=0; i < days.length; i++){
+        var day= days[rowcount].getElementsByClassName("day");
+        for ( var j=0; j< day.length; j++){
+            if(daycount == currentDate - 1){
+                day[j].setAttribute("style","color:rgb(234,1,144);border:2px solid white");
+            }
+
+            if (daycount<daysInThisMonth) {
+                day[j].innerHTML=daycount + 1;
+                day[j].setAttribute("id","day"+(daycount+1));
+                daycount++;
+            }else{
+                day[j].innerHTML="";
+                day[j].setAttribute("style","background-color:white;");
+            }
+        }
+        rowcount++;
+    }
+
+  /*initialize completed array*/
+  var completed= new Array(31);
+  for(var i=0; i<daycount; i++){
+    var tempString=
+      ""+(currentMonth + 1) + "-"+(i+1)+"-"+ currentYear;
+    console.log("storing date:"+ tempString)  
+
+  }
+</script>
 
 </html>

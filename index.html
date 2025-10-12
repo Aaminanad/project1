@@ -32,36 +32,36 @@
                         <div class="day">6</div>
                     </div>
                     <div class="days">
-                        <div class="day">1</div>
-                        <div class="day">2</div>
-                        <div class="day">3</div>
-                        <div class="day">4</div>
-                        <div class="day">5</div>
-                        <div class="day">6</div>
+                        <div class="day">7</div>
+                        <div class="day">8</div>
+                        <div class="day">9</div>
+                        <div class="day">10</div>
+                        <div class="day">11</div>
+                        <div class="day">12</div>
                     </div><div class="days">
-                        <div class="day">1</div>
-                        <div class="day">2</div>
-                        <div class="day">3</div>
-                        <div class="day">4</div>
-                        <div class="day">5</div>
-                        <div class="day">6</div>
+                        <div class="day">13</div>
+                        <div class="day">14</div>
+                        <div class="day">15</div>
+                        <div class="day">16</div>
+                        <div class="day">17</div>
+                        <div class="day">18</div>
                     </div><div class="days">
-                        <div class="day">1</div>
-                        <div class="day">2</div>
-                        <div class="day">3</div>
-                        <div class="day">4</div>
-                        <div class="day">5</div>
-                        <div class="day">6</div>
+                        <div class="day">19</div>
+                        <div class="day">20</div>
+                        <div class="day">21</div>
+                        <div class="day">22</div>
+                        <div class="day">23</div>
+                        <div class="day">24</div>
                     </div><div class="days">
-                        <div class="day">1</div>
-                        <div class="day">2</div>
-                        <div class="day">3</div>
-                        <div class="day">4</div>
-                        <div class="day">5</div>
-                        <div class="day">6</div>
+                        <div class="day">25</div>
+                        <div class="day">26</div>
+                        <div class="day">27</div>
+                        <div class="day">28</div>
+                        <div class="day">29</div>
+                        <div class="day">30</div>
                         
                     </div><div class="days">
-                        <div class="day">6</div>
+                        <div class="day">31</div>
                     </div>
                     
                 </div>
@@ -89,7 +89,7 @@
 
     var months=[
         "January",
-        "Feburary",
+        "February",
         "March",
         "April",
         "May",
@@ -134,10 +134,10 @@
             if(daycount == currentDate - 1){
                 day[j].setAttribute("style","color:rgb(234,1,144);border:2px solid white");
             }
-
             if (daycount<daysInThisMonth) {
                 day[j].innerHTML=daycount + 1;
-                day[j].setAttribute("id","day"+(daycount+1));
+                //todo: FIX
+                day[j].setAttribute("id", "day" + (daycount + 1));
                 daycount++;
             }else{
                 day[j].innerHTML="";
@@ -147,47 +147,47 @@
         rowcount++;
         /*a ye har aik row pr repeat hojaye gaw function ya jo bhi code humne likha hy hehe*/
     }
+/*initialize completed array*/
+var completed= new Array(31);
+for(var i=0; i<daycount; i++){
+    var tempString = (currentMonth + 1) + "-"+(i+1)+"-"+ currentYear;
+    console.log("storing date:"+ tempString);
+    var tempDay = localStorage.getItem(tempString);
+    console.log(tempDay);
+    if(tempDay == null || tempDay == "false"){
+        localStorage.setItem(tempString,"false");
+    }else if (tempDay == "true"){
+        daysCompleted++;
+    }
+}
+totaldays.innerHTML= daysCompleted + "/"+ daysInThisMonth;
 
-//   /*initialize completed array*/
-//   var completed= new Array(31);
-//   for(var i=0; i<daycount; i++){
-//     var tempString=""+(currentMonth + 1) + "-"+(i+1)+"-"+ currentYear;
-//     console.log("storing date:"+ tempString);
-//     var tempDay = localStorage.getItem(tempString);
-//     console.log(tempDay);
-//     if(tempDay == null || tempDay == "false"){
-//         localStorage.setItem(tempString,"false");
+/* check storage and update completed array */
+for (var i = 0; i< daysInThisMonth; i++){
+    var tempString = ""+(currentMonth+1)+"-"+(i+1)+"-"+ currentYear; // ADDED var tempString =
+    console.log(tempString);
 
-//     }else if (tempDay == "true"){
-//         daysCompleted++;
-
-//     }
-//     totaldays.innerHTML= daysCompleted + "/"+ daysInThisMonth;
-
-//   }
-//   /* check storage and update cimpleted array*/
-//   for (var i = 0; i< currentDate; i++){
-//     ""+(currentMonth+1)+"-"+(i+1)+"-"+ currentYear;
-//     console.log(tempString);
-
-//     var chosenDay = localStorage.getItem(tempString);
-//     console.log(i+1 + ": " + chosenDay);
-//     var chosenDayDiv = document.getElementById("day"+(i+1));
-//     if (chosenDay == "true"){
-//         chosenDayDiv.style.backgroundColor  = "pink";
-
-//     }else if (chosenDay=="false"){
-//         chosenDayDiv.style.backgroundColor = "rgb(136, 143, 238)";
-//     }
-//   }
-
-
+    var chosenDay = localStorage.getItem(tempString);
+    console.log(i+1 + ": " + chosenDay);
+    var chosenDayDiv = document.getElementById("day"+(i+1));
+    if (chosenDay == "true"){
+        chosenDayDiv.style.backgroundColor = "rgb(238, 136, 204)";
+    }else if (chosenDay=="false"){
+        chosenDayDiv.style.backgroundColor = "rgb(168, 148, 235)";
+    }
+}
 /* Click on days to mark them complete */
 for(var i = 1; i <= daysInThisMonth; i++){
     var dayDiv = document.getElementById("day" + i);
+    console.log("day div : ",dayDiv);
     if(dayDiv){
         dayDiv.onclick = function(){
             var dayNumber = this.innerHTML;
+            console.log("Day num",dayNumber)
+             if(dayNumber > currentDate){
+                alert("You can't log future days! 💕");
+                return; // Stop the function here
+            }
             var dateString = "" + (currentMonth + 1) + "-" + dayNumber + "-" + currentYear;
             
             var currentStatus = localStorage.getItem(dateString);
@@ -195,12 +195,12 @@ for(var i = 1; i <= daysInThisMonth; i++){
             if(currentStatus == "true"){
                 // If already completed, mark as incomplete
                 localStorage.setItem(dateString, "false");
-                this.style.backgroundColor = "rgb(227, 141, 218)";
+                this.style.backgroundColor = "rgb(168, 148, 235)";
                 daysCompleted--;
             } else {
                 // Mark as completed
                 localStorage.setItem(dateString, "true");
-                this.style.backgroundColor = "rgb(227, 141, 218)";
+                this.style.backgroundColor = "rgb(238, 136, 204)";
                 daysCompleted++;
             }
             
@@ -209,11 +209,31 @@ for(var i = 1; i <= daysInThisMonth; i++){
         }
     }
 }
-
-
-
-
-
+/* Reset Button */
+var resetButton = document.getElementById("resetbutton");
+resetButton.onclick = function(){
+    var confirmReset = confirm("Are you sure you want to reset all your progress for " + months[currentMonth] + "? 💔");
+    
+    if(confirmReset){
+        // Reset all days in localStorage for this month
+        for(var i = 1; i <= daysInThisMonth; i++){
+            var dateString = "" + (currentMonth + 1) + "-" + i + "-" + currentYear;
+            localStorage.setItem(dateString, "false");
+            
+            // Reset the visual appearance
+            var dayDiv = document.getElementById("day" + i);
+            if(dayDiv && i <= currentDate){
+                dayDiv.style.backgroundColor = "rgb(168, 148, 235)";
+            }
+        }
+        
+        // Reset the counter
+        daysCompleted = 0;
+        totaldays.innerHTML = "0/" + daysInThisMonth;
+        
+        alert("Your habit tracker has been reset! ✨");
+    }
+}
 
 
 </script>
